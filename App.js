@@ -21,13 +21,10 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Provider store = {initstore}>
-      {/* <Headerbar headerText={"MediX"} /> */}
       <Image source={require('./images/banner.png')} />
       <ProfileHeader />
-      {/* <VoiceNative /> */}
       <DetectionArea />
-      {/* <Grid />       */}
-      </Provider>
+      <Provider />
     );
   }
 }

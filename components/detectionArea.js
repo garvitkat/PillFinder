@@ -28,22 +28,15 @@ class DetectionArea extends Component {
   checkMed(distance) {
     console.log(this.state.Lastmedicine, this.state.medicine)
 
-
-
-
-
     if (distance >= 100 && distance <= 150) {
       this.setState({ stage: "medPlaced", LastLastLastmedicine: "Medicine One" })
 
       this.setState({ medicine: "Medicine One", currentQuantity: this.state.Medicine1Quantity, currentTimes: this.state.Medicine1Times })
 
-
       if (this.state.Lastmedicine != "Medicine One") {
         this._onPressSpeech("Medicine One")
       }
     }
-
-
 
     else if (distance >= 160 && distance <= 200) {
       this.setState({ stage: "medPlaced", LastLastLastmedicine: "Medicine Two" })
@@ -51,14 +44,12 @@ class DetectionArea extends Component {
       if (this.state.Lastmedicine != "Medicine Two") {
         this._onPressSpeech("Medicine Two")
       }
-
     }
   }
 
   _onPressSpeech = (text) => {
     Tts.stop(text);
     this.setState({ subtitle: text })
-    // console.log("SPEAKING", text)
     Tts.speak(text);
     this.setState({
       Lastmedicine: text,
@@ -68,7 +59,6 @@ class DetectionArea extends Component {
 
   constructor(props) {
     super(props);
-
 
     this.state = {
       currentMessage: 'Place Bottle Here',
@@ -91,8 +81,6 @@ class DetectionArea extends Component {
       stage: "Empty",
       movement: ""
     };
-
-
 
     Tts.setDefaultLanguage('en-US');
     Tts.addEventListener('tts-start', event => console.log('start', event));
@@ -125,16 +113,8 @@ class DetectionArea extends Component {
       onPanResponderGrant: (evt, gestureState) => {
         // gestureState.d{x,y} will be set to zero now
         console.log("Touch Started", evt.nativeEvent)
-        //  this._startRecognition()
       },
       onPanResponderMove: (evt, gestureState) => {
-        // The most recent move distance is gestureState.move{X,Y}
-        // The accumulated gesture distance since becoming responder is
-        // gestureState.d{x,y}
-        // let Moved = Math.sqrt(Math.pow(gestureState.dx,2)+Math.pow(gestureState.dy,2))
-        // // if(Math.sign(gestureState.dx) == -1 &&  Math.abs(gestureState.dx) > Math.abs(gestureState.dy) || Math.sign(gestureState.dy) == -1 &&  Math.abs(gestureState.dy) > Math.abs(gestureState.dx)) {
-        // //   Moved = -1 * Moved
-        // // }
 
         if (gestureState.dx > 50) {
           console.log("Move Right")
@@ -151,13 +131,10 @@ class DetectionArea extends Component {
         }
         console.log("gestureState.dx: ", gestureState.dx)
 
-        // console.log("Touch event",evt.nativeEvent)
-
         if (evt.nativeEvent.touches.length >= 1) {
           this.distanceCalculator(evt.nativeEvent.touches)
           this.setState({ currentMessage: 'Detected' })
         }
-
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
@@ -166,26 +143,19 @@ class DetectionArea extends Component {
           this.setState({ stage: "DidYouTakeIt" })
 
           this._onPressSpeech("You need to take it " + this.state.currentTimes + " times a day. Did you take it?")
-          // this._startRecognition()
         }
         if (evt.nativeEvent.touches.length == 0) {
           this.setState({ currentMessage: 'Place Container Here', distance: 0, medicine: "", Lastmedicine: "", currentQuantity: [0, 0], currentTimes: 0 })
         }
       },
       onPanResponderTerminate: (evt, gestureState) => {
-        // Another component has become the responder, so this gesture
-        // should be cancelled
       },
       onShouldBlockNativeResponder: (evt, gestureState) => {
-        // Returns whether this component should block native components from becoming the JS
-        // responder. Returns true by default. Is currently only supported on android.
         return true;
       },
     });
 
   }
-
-
 
   componentDidMount() {
     console.log('mounted touch area')
@@ -251,9 +221,6 @@ class DetectionArea extends Component {
           <Text style={style.headfont}>
             {this.state.currentMessage}
           </Text>
-          {/* {    <Text > 
-    {this.state.distance}
-     </Text>} */}
           {
             (this.state.currentQuantity[1]) ? <Text style={style.medicineAlt}>{this.state.currentQuantity[0] + '/' + this.state.currentQuantity[1] + ' Remaining'}</Text> : null
           }
@@ -261,21 +228,13 @@ class DetectionArea extends Component {
             (this.state.currentTimes) ? <Text style={style.medicineAlt1}>{'Take it ' + this.state.currentTimes + ' times a day'}</Text> : null
           }
           <Text style={style.medicineText}>
-
             {this.state.medicine}
           </Text>
 
           <Text style={style.subtitleText}>
             {this.state.subtitle}
           </Text>
-
-
-
-          {/* <Image style={style.box} /> */}
         </Animated.View>
-
-
-
       </View>);
   }
 };
@@ -283,7 +242,6 @@ const style = StyleSheet.create({
   headstyle: {
     fontSize: 30,
     color: 'grey',
-    // backgroundColor: 'pink',
     height: "100%",
     alignContent: 'center',
     alignItems: 'center',

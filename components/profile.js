@@ -7,10 +7,7 @@ class ProfileHeader extends Component {
     constructor(props) {
         super(props);
       }
-    
-    componentDidMount() {
 
-    }  
     render() {
         return (
     <View style={style.headstyle}>
@@ -19,7 +16,7 @@ class ProfileHeader extends Component {
           >
     <Image source={require('./../images/profile.jpg')} style={style.profileImg} />
 </TouchableHighlight>
-          <Text style={style.headfont}>Hello, Darsh!</Text>
+          <Text style={style.headfont}>Hello, Garvit!</Text>
     </View>);
 }};
 const style = StyleSheet.create({
@@ -31,7 +28,6 @@ const style = StyleSheet.create({
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.9,
-        // backgroundColor: '#4286f4'
       },
     headfont: {
         fontSize: 30,
