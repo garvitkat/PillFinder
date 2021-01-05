@@ -24,7 +24,7 @@ export default class App extends Component<Props> {
       <Image source={require('./images/banner.png')} />
       <ProfileHeader />
       <DetectionArea />
-      <Provider />
+      </Provider>
     );
   }
 }
