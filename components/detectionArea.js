@@ -7,8 +7,6 @@ import { ToastAndroid } from 'react-native';
 import Axios from 'axios';
 
 class DetectionArea extends Component {
-
-
   distanceCalculator(touches) {
     if (touches.length == 2) {
       let x1 = touches[0].locationX
