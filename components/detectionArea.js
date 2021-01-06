@@ -25,8 +25,6 @@ class DetectionArea extends Component {
   }
 
   checkMed(distance) {
-    console.log(this.state.Lastmedicine, this.state.medicine)
-
     if (distance >= 100 && distance <= 150) {
       this.setState({ stage: "medPlaced", LastLastLastmedicine: "Medicine One" })
       this.setState({ medicine: "Medicine One", currentQuantity: this.state.Medicine1Quantity, currentTimes: this.state.Medicine1Times })
@@ -105,20 +103,15 @@ class DetectionArea extends Component {
       onPanResponderMove: (evt, gestureState) => {
 
         if (gestureState.dx > 50) {
-          console.log("Move Right")
           this.setState({ movement: "left" })
         }
         if (gestureState.dx < -30) {
-          console.log("Move Left")
           this.setState({ movement: "right" })
           this.setState({ movement: "right" })
         }
         if (gestureState.dx == 0) {
-          console.log("Move Left")
           this.setState({ movement: "" })
         }
-        console.log("gestureState.dx: ", gestureState.dx)
-
         if (evt.nativeEvent.touches.length >= 1) {
           this.distanceCalculator(evt.nativeEvent.touches)
           this.setState({ currentMessage: 'Detected' })
@@ -141,7 +134,6 @@ class DetectionArea extends Component {
         return true;
       },
     });
-
   }
 
   componentWillUnmount() {
