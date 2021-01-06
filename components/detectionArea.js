@@ -21,7 +21,6 @@ class DetectionArea extends Component {
     }
     else {
       this.setState({ distance: 0 })
-
     }
   }
 
@@ -30,14 +29,11 @@ class DetectionArea extends Component {
 
     if (distance >= 100 && distance <= 150) {
       this.setState({ stage: "medPlaced", LastLastLastmedicine: "Medicine One" })
-
       this.setState({ medicine: "Medicine One", currentQuantity: this.state.Medicine1Quantity, currentTimes: this.state.Medicine1Times })
-
       if (this.state.Lastmedicine != "Medicine One") {
         this._onPressSpeech("Medicine One")
       }
     }
-
     else if (distance >= 160 && distance <= 200) {
       this.setState({ stage: "medPlaced", LastLastLastmedicine: "Medicine Two" })
       this.setState({ medicine: "Medicine Two", currentQuantity: this.state.Medicine2Quantity, currentTimes: this.state.Medicine2Times })
@@ -59,7 +55,6 @@ class DetectionArea extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       currentMessage: 'Place Bottle Here',
       touchCount: 0,
@@ -83,23 +78,17 @@ class DetectionArea extends Component {
     };
 
     Tts.setDefaultLanguage('en-US');
-    Tts.addEventListener('tts-start', event => console.log('start', event));
     Tts.addEventListener("tts-finish", event => {
       this.setState({ ttsStatus: "finished", subtitle: "" })
-      console.log("Listneer", this.state.currentTimes, this.state.medicine, this.state.Lastmedicine)
       if (this.state.currentTimes == 0 && this.state.stage != "medPlaced" && this.state.stage != "ordermoreConfirm") {
-        console.log("inside Listneer")
-        console.log(this.state)
         this._startRecognition()
       }
-      console.log('tts-finsih', this.state)
       if (this.state.stage == "ordermoreConfirm") {
-        console.log("inside order confirm")
         this._startRecognition()
         this.setState({ stage: "ordermoreConfirm1" })
       }
     }
-    ); Tts.addEventListener('tts-cancel', event => console.log('cancel', event));
+    ); 
     Voice.onSpeechStart = this.onSpeechStart.bind(this);
     Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
     Voice.onSpeechResults = this.onSpeechResults.bind(this);
@@ -112,7 +101,6 @@ class DetectionArea extends Component {
 
       onPanResponderGrant: (evt, gestureState) => {
         // gestureState.d{x,y} will be set to zero now
-        console.log("Touch Started", evt.nativeEvent)
       },
       onPanResponderMove: (evt, gestureState) => {
 
@@ -138,7 +126,6 @@ class DetectionArea extends Component {
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
-        console.log(this.state.medicine, this.state.Lastmedicine)
         if (this.state.medicine == this.state.Lastmedicine && this.state.currentTimes != 0) {
           this.setState({ stage: "DidYouTakeIt" })
 
@@ -155,10 +142,6 @@ class DetectionArea extends Component {
       },
     });
 
-  }
-
-  componentDidMount() {
-    console.log('mounted touch area')
   }
 
   componentWillUnmount() {
@@ -178,15 +161,11 @@ class DetectionArea extends Component {
     this.setState({
       results: e.value,
     });
-    console.log(this.state.results)
     if (this.state.results.includes('yes')) {
-      console.log("Yes Response: ", this.state.currentQuantity, this.state.LastLastmedicine)
       this.state.LastLastmedicine == "Medicine One" ? this.setState({ Medicine1Quantity: [this.state.Medicine1Quantity[0] - 1, this.state.Medicine1Quantity[1]] }) : this.setState({ Medicine2Quantity: [this.state.Medicine2Quantity[0] - 1, this.state.Medicine2Quantity[1]] })
       this.setState({ subtitle: this.state.Medicine1Quantity[0] + " Pills Remaining" })
       this._onPressSpeech(this.state.Medicine1Quantity[0] + " Pills Remaining")
-      console.log(this.state.Medicine1Quantity, this.state.Medicine2Quantity)
       if (this.state.Medicine2Quantity[0] <= 4 && this.state.stage != "ordermoreConfirm1") {
-        console.log("RUNNING OUT PROMPT")
         this._onPressSpeech("You're running out of this, do you want to order more ?")
         this.setState({ stage: 'ordermoreConfirm' })
       }
@@ -210,10 +189,7 @@ class DetectionArea extends Component {
       console.error(e);
     }
   }
-
   render() {
-
-
     return (
       <View style={style.headstyle} {...this._panResponder.panHandlers} >
         <Animated.View
