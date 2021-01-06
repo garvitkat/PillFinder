@@ -14,9 +14,6 @@ import DetectionArea from './components/detectionArea'
 import initstore from './store';
 
 type Props = {};
-console.log(initstore.getState());
-console.reportErrorsAsExceptions = false;
-console.disableYellowBox = true;
 export default class App extends Component<Props> {
   render() {
     return (
