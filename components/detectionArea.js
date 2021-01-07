@@ -90,43 +90,14 @@ class DetectionArea extends Component {
     Voice.onSpeechResults = this.onSpeechResults.bind(this);
     this._panResponder = PanResponder.create({
       // Ask to be the responder:
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-
-      onPanResponderGrant: (evt, gestureState) => {
-        // gestureState.d{x,y} will be set to zero now
-      },
-      onPanResponderMove: (evt, gestureState) => {
-
-        if (gestureState.dx > 50) {
-          this.setState({ movement: "left" })
-        }
-        if (gestureState.dx < -30) {
-          this.setState({ movement: "right" })
-          this.setState({ movement: "right" })
-        }
-        if (gestureState.dx == 0) {
-          this.setState({ movement: "" })
-        }
-        if (evt.nativeEvent.touches.length >= 1) {
-          this.distanceCalculator(evt.nativeEvent.touches)
-          this.setState({ currentMessage: 'Detected' })
-        }
-      },
-      onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
         if (this.state.medicine == this.state.Lastmedicine && this.state.currentTimes != 0) {
           this.setState({ stage: "DidYouTakeIt" })
-
           this._onPressSpeech("You need to take it " + this.state.currentTimes + " times a day. Did you take it?")
         }
         if (evt.nativeEvent.touches.length == 0) {
           this.setState({ currentMessage: 'Place Container Here', distance: 0, medicine: "", Lastmedicine: "", currentQuantity: [0, 0], currentTimes: 0 })
         }
-      },
-      onPanResponderTerminate: (evt, gestureState) => {
       },
       onShouldBlockNativeResponder: (evt, gestureState) => {
         return true;
