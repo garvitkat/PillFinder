@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Voice from 'react-native-voice';
 import Tts from 'react-native-tts';
 
-import { Platform, StyleSheet, Text, View, PanResponder, Image, Animated, Button } from 'react-native';
-import { ToastAndroid } from 'react-native';
+import { StyleSheet, Text, View, PanResponder, Animated} from 'react-native';
 import Axios from 'axios';
 
 class DetectionArea extends Component {

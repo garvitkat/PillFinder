@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, TouchableHighlight} from 'react-native';
-import { hidden } from 'ansi-colors';
+
 
 
 class ProfileHeader extends Component { 
