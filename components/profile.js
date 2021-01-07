@@ -11,14 +11,14 @@ class ProfileHeader extends Component {
     render() {
         return (
     <View style={style.headstyle}>
-    <TouchableHighlight
-          style={[style.profileImgContainer]}
-          >
+    <TouchableHighlight style={[style.profileImgContainer]}>
     <Image source={require('./../images/profile.jpg')} style={style.profileImg} />
-</TouchableHighlight>
-          <Text style={style.headfont}>Hello, Garvit!</Text>
+    </TouchableHighlight>
+    <Text style={style.headfont}>Hello, Garvit!</Text>
     </View>);
-}};
+    }
+   };
+
 const style = StyleSheet.create({
     headstyle: {
         flexDirection: 'row',
